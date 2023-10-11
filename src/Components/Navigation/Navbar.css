@@ -1,0 +1,43 @@
+.ln.active {
+  color: #FF444A;
+}
+
+.ln, .bt {
+  display: inline-block;
+  position: relative;
+  margin: 20px;
+  transition: color 500ms;
+}
+
+.ms {
+  margin: 5px;
+  margin-left: 15px;
+}
+
+.ft {
+  margin: 5px;
+}
+
+.ln:after {
+  content: '';
+  width: 0px;
+  height: 2px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #FF444A;
+  transition: 300ms;
+}
+
+.ln:hover {
+  color: #FF444A;
+}
+
+.ln:hover:after {
+  width: 100%;
+}
+
+.ln:not(:hover):after {
+  right: 0;
+  left: auto;
+}
