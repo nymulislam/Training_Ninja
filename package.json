@@ -11,9 +11,7 @@
   },
   "dependencies": {
     "classnames": "^2.3.2",
-    "flowbite": "^1.8.1",
-    "flowbite-react": "^0.6.4",
-    "infinite-react-carousel": "^1.2.11",
+    "firebase": "^10.7.0",
     "jquery": "^3.7.1",
     "jquery-validation": "^1.20.0",
     "localforage": "^1.10.0",
@@ -23,6 +21,7 @@
     "react-dom": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.16.0",
+    "sonner": "^1.2.4",
     "sort-by": "^1.2.0",
     "styled-components": "^6.0.8"
   },

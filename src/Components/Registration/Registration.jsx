@@ -1,31 +1,50 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import backgroundPNG from "../../../public/Meteor.svg";
+import { Link, useNavigate } from "react-router-dom";
+import backgroundPNG from "/Meteor.svg";
+import { toast } from "sonner";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const SignUp = () => {
+  const { createUser, googleSignIn } = useContext(AuthContext);
+  const [passwordError, setPasswordError] = useState("");
+  const navigate = useNavigate()
   const containerStyle = {
     backgroundImage: `url(${backgroundPNG})`,
     backgroundRepeat: "repeat",
   };
 
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    acceptTerms: false, // New state for the checkbox
-  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
 
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    // Use a different approach for the checkbox
-    const newValue = type === "checkbox" ? checked : value;
-    setFormData({ ...formData, [name]: newValue });
+    // Password conditions
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setPasswordError("Password must contain at least one capital letter");
+      return;
+    } else if (!/[^A-Za-z0-9]/.test(password)) {
+      setPasswordError("Password must contain at least one special character");
+      return;
+    }
+
+    try {
+      await createUser(email, password, name);
+      toast.success("Account created successfully!");
+      form.reset()
+      navigate('/')
+    } catch (error) {
+      toast.error("Error creating account. Please try again.");
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Validate the form and handle form submission here
+  const handleGoogleSingIn = () => {
+    googleSignIn();
+    navigate('/')
   };
 
   return (
@@ -34,17 +53,15 @@ const SignUp = () => {
         <h1 className="text-3xl font-bold text-center">Sign Up</h1>
         <form noValidate="" onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-1 text-base">
-            <label htmlFor="username" className="block dark:text-gray-400">
-              Username
+            <label htmlFor="name" className="block dark:text-gray-400">
+              Name
             </label>
             <input
               type="text"
-              name="username"
-              id="username"
-              placeholder="Username"
+              name="name"
+              id="name"
+              placeholder="Name"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
-              value={formData.username}
-              onChange={handleInputChange}
               required
             />
           </div>
@@ -58,8 +75,6 @@ const SignUp = () => {
               id="email"
               placeholder="Email"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
-              value={formData.email}
-              onChange={handleInputChange}
               required
             />
           </div>
@@ -73,41 +88,11 @@ const SignUp = () => {
               id="password"
               placeholder="Password"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
-              value={formData.password}
-              onChange={handleInputChange}
               required
             />
-          </div>
-          <div className="space-y-1 text-base">
-            <label
-              htmlFor="confirmPassword"
-              className="block dark:text-gray-400"
-            >
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              placeholder="Confirm Password"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
-              value={formData.confirmPassword}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              name="acceptTerms"
-              id="acceptTerms"
-              className="mr-2"
-              checked={formData.acceptTerms}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="acceptTerms" className="dark:text-gray-400">
-              I accept the Terms and Conditions
-            </label>
+            {passwordError && (
+              <p className="text-red-500 text-sm">{passwordError}</p>
+            )}
           </div>
           <button className="btn bt w-full text-white hover:bg-black bg-gray-800 hover:text-[#ff1949] font-bold text-base ms">
             Sign Up
@@ -121,7 +106,11 @@ const SignUp = () => {
           <div className="flex-1 bg-gray-700 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
         <div className="flex justify-center space-x-4">
-          <button aria-label="Log in with Google" className="p-3 rounded-sm">
+          <button
+            onClick={handleGoogleSingIn}
+            aria-label="Log in with Google"
+            className="p-3 rounded-sm"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
@@ -130,7 +119,11 @@ const SignUp = () => {
               <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
             </svg>
           </button>
-          <button aria-label="Log in with X" className="p-3 rounded-sm">
+          <button
+            aria-label="Log in with X"
+            onClick={() => toast.error("This feature not available!")}
+            className="p-3 rounded-sm"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -142,7 +135,11 @@ const SignUp = () => {
               <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z" />
             </svg>
           </button>
-          <button aria-label="Log in with GitHub" className="p-3 rounded-sm">
+          <button
+            onClick={() => toast.error("This feature not available!")}
+            aria-label="Log in with GitHub"
+            className="p-3 rounded-sm"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"

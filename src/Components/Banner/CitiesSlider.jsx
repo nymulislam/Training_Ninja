@@ -13,34 +13,34 @@ class CitiesSlider extends React.Component {
     this.IMAGE_PARTS = 4;
     
     this.changeTO = null;
-    this.AUTOCHANGE_TIME = 4000;
+    this.AUTOCHANGE_TIME = 5000;
     
     this.state = { activeSlide: -1, prevSlide: -1, sliderReady: false };
   }
 
   slides = [
     {
-      city: 'Paris',
-      country: 'France',
+      city: 'SkillUp',
+      country: 'CertifyMe',
       img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/paris.jpg',
     },
     {
-      city: 'Singapore',
+      city: 'CareerFlow',
       img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/singapore.jpg',
     },
     {
-      city: 'Prague',
-      country: 'Czech Republic',
+      city: 'ConnectHub',
+      country: 'ResumeLab',
       img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/prague.jpg',
     },
     {
-      city: 'Amsterdam',
-      country: 'Netherlands',
+      city: 'EduForge',
+      country: 'InnovateEd',
       img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/amsterdam.jpg',
     },
     {
-      city: 'Moscow',
-      country: 'Russia',
+      city: 'LearnPath',
+      country: 'TechBoost',
       img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/moscow.jpg',
     },
   ];
@@ -77,7 +77,7 @@ class CitiesSlider extends React.Component {
     const { activeSlide, prevSlide, sliderReady } = this.state;
     return (
       <div className={classNames('slider', { 's--ready': sliderReady })}>
-        <p className="slider__top-heading">Travelers</p>
+        <p className="slider__top-heading">InnoWave</p>
         <div className="slider__slides">
           {this.slides.map((slide, index) => (
             <div

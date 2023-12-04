@@ -1,31 +1,71 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import backgroundPNG from '../../../public/Meteor.svg';
+import { Link, useNavigate } from "react-router-dom";
+import backgroundPNG from "/Meteor.svg";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
+import { toast } from "sonner";
 
 const Login = () => {
-    const containerStyle = {
-        backgroundImage: `url(${backgroundPNG})`,
-        backgroundRepeat: 'repeat',
-      };
+  const { signIn, googleSignIn } = useContext(AuthContext);
+  const [passwordError, setPasswordError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const navigate = useNavigate();
+  const containerStyle = {
+    backgroundImage: `url(${backgroundPNG})`,
+    backgroundRepeat: "repeat",
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    // Reset previous errors
+    setPasswordError("");
+    setEmailError("");
+
+    try {
+      await signIn(email, password);
+      toast.success("User logged in successfully!");
+      navigate("/");
+      form.reset();
+    } catch (error) {
+      const errorCode = error.code;
+      if (errorCode === "auth/invalid-credential") {
+        setPasswordError("Invalid password");
+      } else if (errorCode === "auth/invalid-email") {
+        setEmailError("User not found");
+      } else {
+        console.error("Login error:", error);
+      }
+    }
+  };
+  const handleGoogleSignIn = () => {
+    googleSignIn();
+    navigate('/')
+  };
+
   return (
     <div style={containerStyle} className="py-10">
       <div className="w-full bg-white max-w-md mx-auto p-8 space-y-3 rounded-xl shadow-xl dark:bg-gray-900 dark:text-gray-100">
         <h1 className="text-3xl font-bold text-center">Login</h1>
-        <form noValidate="" action="" className="space-y-6">
+        <form noValidate="" onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-1 text-base">
-            <label for="username" className="block dark:text-gray-400">
-              Username
+            <label htmlFor="email" className="block dark:text-gray-400">
+              Email
             </label>
             <input
               type="text"
-              name="username"
-              id="username"
-              placeholder="Username"
+              name="email"
+              id="email"
+              placeholder="Email"
+              required
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             />
+            {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
           </div>
           <div className="space-y-1 text-base">
-            <label for="password" className="block dark:text-gray-400">
+            <label htmlFor="password" className="block dark:text-gray-400">
               Password
             </label>
             <input
@@ -33,10 +73,18 @@ const Login = () => {
               name="password"
               id="password"
               placeholder="Password"
+              required
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             />
+            {passwordError && (
+              <p className="text-red-500 text-sm">{passwordError}</p>
+            )}
             <div className="text-base dark:text-gray-400 text-right">
-              <Link rel="noopener noreferrer" to="/registration" className="ln ms">
+              <Link
+                rel="noopener noreferrer"
+                to="/registration"
+                className="ln ms"
+              >
                 Forgot Password?
               </Link>
             </div>
@@ -53,7 +101,11 @@ const Login = () => {
           <div className="flex-1 bg-gray-700 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
         <div className="flex justify-center space-x-4">
-          <button aria-label="Log in with Google" className="p-3 rounded-sm">
+          <button
+            onClick={handleGoogleSignIn}
+            aria-label="Log in with Google"
+            className="p-3 rounded-sm"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
@@ -63,16 +115,16 @@ const Login = () => {
             </svg>
           </button>
           <button aria-label="Log in with X" className="p-3 rounded-sm">
-          <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-                className="bi bi-twitter-x ln ft"
-              >
-                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z" />
-              </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+              className="bi bi-twitter-x ln ft"
+            >
+              <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z" />
+            </svg>
           </button>
           <button aria-label="Log in with GitHub" className="p-3 rounded-sm">
             <svg
@@ -85,8 +137,7 @@ const Login = () => {
           </button>
         </div>
         <p className="text-base font-semibold text-center text-gray-600 sm:px-6 dark:text-gray-400">
-          Don't have an account?
-          {" "}
+          Don&apos;t have an account?{" "}
           <Link
             rel="noopener noreferrer"
             to="/registration"
