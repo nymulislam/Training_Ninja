@@ -1,8 +1,10 @@
 # Training Ninja
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+WebSite Live Link: https://training-ninja.vercel.app/
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Explain Project feature:
+- Implement Google Authentication System, User Able to Sign Up or Login by Using Email & Password, or Sign In With Gmail.
+- Handling Error Messages by Modern Alert System. This way User Experience will be Better.
+- Implement Private Route, There way User Privacy will be Protected for Every Time.
+- User can See Services Details Separately.
+- Implement A little bit Motion System for Better User Experience.
