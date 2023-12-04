@@ -1,0 +1,45 @@
+[
+    {
+      "id": 1,
+      "name": "John Doe",
+      "designation": "Marketing Professional",
+      "testimonial": "Attended the Digital Marketing Workshop and it exceeded my expectations. The hands-on approach and expert insights were invaluable. Highly recommended!",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "name": "Alice Smith",
+      "designation": "Software Engineer",
+      "testimonial": "Tech Career Fair provided an excellent platform to connect with top tech companies. Secured my dream job! Thanks, Training Ninja!",
+      "rating": 4.5
+    },
+    {
+      "id": 3,
+      "name": "Dr. Emily Johnson",
+      "designation": "Educational Leader",
+      "testimonial": "The Educational Leadership Conference was enlightening. Engaged discussions on policy and teaching methods. Will attend again next year.",
+      "rating": 4
+    },
+    {
+      "id": 4,
+      "name": "Alex Green",
+      "designation": "Python Developer",
+      "testimonial": "Python Programming Training was comprehensive and well-structured. Enhanced my coding skills significantly. Great instructors!",
+      "rating": 4.8
+    },
+    {
+      "id": 5,
+      "name": "Samantha Lee",
+      "designation": "Data Scientist",
+      "testimonial": "Data Science Webinar had excellent speakers. Covered advanced topics in an accessible way. A must-attend for data enthusiasts!",
+      "rating": 4.7
+    },
+    {
+      "id": 6,
+      "name": "Mark Turner",
+      "designation": "Project Manager",
+      "testimonial": "Project Management Certification Program was rigorous and practical. Improved my project planning and execution skills. Highly recommend!",
+      "rating": 4.9
+    }
+  ]
+  

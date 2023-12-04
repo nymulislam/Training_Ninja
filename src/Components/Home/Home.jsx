@@ -1,11 +1,14 @@
 import CitiesSlider from "../Banner/CitiesSlider";
+import ExpertAdvice from "../ExpertAdvice/ExpertAdvice";
+import Reviews from "../Reviews/Reviews";
 
 const Home = () => {
 
     return (
         <div>
         <CitiesSlider></CitiesSlider>
-            <h2>This is Home section.</h2>
+        <ExpertAdvice></ExpertAdvice>
+        <Reviews></Reviews>
         </div>
     );
 };

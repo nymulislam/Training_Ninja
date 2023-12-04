@@ -1,0 +1,39 @@
+[
+    {
+      "id": 1,
+      "name": "Dr. Jennifer Carter",
+      "designation": "Digital Marketing Expert",
+      "advice": "In the ever-changing landscape of digital marketing, staying updated is crucial. Embrace social media trends and leverage analytics for success."
+    },
+    {
+      "id": 2,
+      "name": "Andrew Reynolds",
+      "designation": "Tech Industry Guru",
+      "advice": "Tech careers are dynamic. Constantly upskill, be adaptable, and network with professionals. Attend events like Tech Career Fair for opportunities."
+    },
+    {
+      "id": 3,
+      "name": "Prof. Amanda Turner",
+      "designation": "Education Strategist",
+      "advice": "Effective educational leadership requires a focus on innovation. Stay informed about policy changes and foster a positive learning environment."
+    },
+    {
+      "id": 4,
+      "name": "Dr. Michael Brown",
+      "designation": "Python Programming Expert",
+      "advice": "To master Python, start with fundamentals. Practice coding regularly and collaborate on open-source projects. Attend workshops for hands-on experience."
+    },
+    {
+      "id": 5,
+      "name": "Dr. Emily Chen",
+      "designation": "Data Science Specialist",
+      "advice": "Data science is interdisciplinary. Develop skills in statistics, programming, and domain expertise. Engage in webinars to explore emerging trends."
+    },
+    {
+      "id": 6,
+      "name": "Sarah Harris",
+      "designation": "Project Management Mentor",
+      "advice": "Project managers need a diverse skill set. Earn certifications, attend training programs, and focus on effective communication for project success."
+    }
+  ]
+  
