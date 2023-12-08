@@ -22,16 +22,6 @@ const link = (
         Services
       </NavLink>
     </li>
-    <li>
-      <NavLink to="/about" className="block ln py-2 pl-3 pr-4 rounded md:p-0">
-        About
-      </NavLink>
-    </li>
-    <li>
-      <NavLink to="/contact" className="block ln py-2 pl-3 pr-4 rounded md:p-0">
-        Contact
-      </NavLink>
-    </li>
   </>
 );
 
